@@ -26,6 +26,7 @@ class LoginController extends Controller
                 //採用Crypt加密，decrypt解密，encrypt加密
                 return back()->with('msg','帳號或是密碼錯誤');
             }
+            session(['user' => $user]);
             return view('admin.index');
         }
         else{
