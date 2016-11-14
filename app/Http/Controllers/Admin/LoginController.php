@@ -34,6 +34,12 @@ class LoginController extends Controller
         }
     }
 
+    public function quit()
+    {
+        session(['user' => null]);
+        return redirect('admin/login');
+    }
+
     public function code()
     {
         $code = new \Code; //產生一個Code物件
