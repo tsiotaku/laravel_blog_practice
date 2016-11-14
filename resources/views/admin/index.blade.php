@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<link rel="stylesheet" href="{{asset('resources/views/admin/style/css/ch-ui.admin.css')}}">
-	<link rel="stylesheet" href="{{asset('resources/views/admin/style/font/css/font-awesome.min.css')}}">
-	<script type="text/javascript" src="{{asset('resources/views/admin/style/js/jquery.js')}}"></script>
-    <script type="text/javascript" src="{{asset('resources/views/admin/style/js/ch-ui.admin.js')}}"></script>
-</head>
-<body>
+@extends('layouts.admin')
+
+@section('content')
 	<!--头部 开始-->
 	<div class="top_box">
 		<div class="top_left">
@@ -21,7 +14,7 @@
 			<ul>
 				<li>管理员：admin</li>
 				<li><a href="pass.html" target="main">修改密码</a></li>
-				<li><a href="#">退出</a></li>
+				<li><a href="{{ url('admin/login') }}">退出</a></li>
 			</ul>
 		</div>
 	</div>
@@ -70,5 +63,4 @@
 		CopyRight © 2016. Powered By <a href="http://www.chenhua.club">http://www.chenhua.club</a>.
 	</div>
 	<!--底部 结束-->
-</body>
-</html>
+@endsection

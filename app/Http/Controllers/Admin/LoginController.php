@@ -27,7 +27,7 @@ class LoginController extends Controller
                 return back()->with('msg','帳號或是密碼錯誤');
             }
             session(['user' => $user]);
-            return view('admin.index');
+            return redirect('admin/index');
         }
         else{
             return view('admin.login');
