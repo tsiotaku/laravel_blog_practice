@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Input;
 
 require_once 'resources/org/code/Code.class.php'; //引入驗證碼功能
@@ -17,11 +19,14 @@ class LoginController extends Controller
             $code = new \Code; //產生一個Code物件
             $_code = $code->get(); //使用Code物件中的get()方法得到驗證碼數值
             if($input['code']!=$_code){
-                //return back()->with('msg','驗證碼錯誤');
-                echo "錯誤";
-            }else{
-                echo "正確";
+                return back()->with('msg','驗證碼錯誤');
             }
+            $user = User::first();
+            if(  $user->user_name != $input['user_name'] || Crypt::decrypt($user->user_pass) != $input['user_pass']){
+                //採用Crypt加密，decrypt解密，encrypt加密
+                return back()->with('msg','帳號或是密碼錯誤');
+            }
+            return view('admin.index');
         }
         else{
             return view('admin.login');
