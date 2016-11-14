@@ -11,14 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 
 Route::group(['middleware' => ['web']], function () {
+    Route::get('/', function () {
+        return view('welcome');
+    });
 
-    Route::any('admin/login', 'Admin\LoginController@login');
+    Route::any('admin/login', 'IndexController@login');
     Route::get('admin/code', 'Admin\LoginController@code');
     Route::get('admin/getcode', 'Admin\LoginController@getcode');
 });
