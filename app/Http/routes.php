@@ -10,26 +10,22 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
-
-
-Route::group(['middleware' => ['web']], function () {
-    Route::get('/', function () {
+Route::get('/', function () {
         return view('welcome');
     });
 
-    Route::any('admin/login', 'Admin\LoginController@login');
+Route::any('admin/login', 'Admin\LoginController@login');
 
-    Route::any('admin/index', 'Admin\IndexController@index');
-    Route::any('admin/info', 'Admin\IndexController@info');
 
+Route::group(['middleware' => ['web']], function () {
     Route::get('admin/code', 'Admin\LoginController@code');
     Route::get('admin/getcode', 'Admin\LoginController@getcode');
 });
 
 
 Route::group(['middleware' => ['web','admin.login'],'prefix' => 'admin','namespace' => 'Admin'], function () {
-    Route::any('index', 'IndexController@index');
-    Route::any('info', 'IndexController@info');
+    Route::get('index', 'IndexController@index');
+    Route::get('info', 'IndexController@info');
+    Route::any('pass', 'IndexController@pass');
     Route::get('quit', 'LoginController@quit');
 });

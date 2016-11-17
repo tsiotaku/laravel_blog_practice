@@ -18,4 +18,9 @@ class IndexController extends Controller
     {
         return view('admin.info');
     }
+
+    public function pass()
+    {
+        return view('admin.pass');
+    }
 }
