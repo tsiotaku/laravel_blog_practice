@@ -42,7 +42,7 @@
             <tr>
                 <th><i class="require">*</i>新密码：</th>
                 <td>
-                    <input type="password" name="password" value=""> </i>新密码6-20位</span>
+                    <input type="password" name="password" value=""> </i>新密码1-20位</span>
                 </td>
             </tr>
             <tr>
