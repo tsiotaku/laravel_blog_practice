@@ -18,20 +18,27 @@ class CategoryController extends Controller
     public function index()
     {
         $categorys = Category::all();
-        $datas = $this->getTree($categorys);
+        $datas = $this->getTree($categorys,'cate_name','cate_id','cate_pid');
 
         return view('admin.category.index')->with('datas',$datas);
     }
 
-    public function getTree($datas){
+    /**
+     * @param $datas  //Category::all()取得的所有文章資訊
+     * @param $file_name  //子分類陣列變數$file_name前面加上'_'頁面上用以增加顯示'├── '符號於子分類前，ex:├── 军事新闻
+     * @param $field_id  //文章分類的id
+     * @param $field_pid  //子分類屬於哪個主分類pid值為主分類的值
+     * @return array
+     */
+    public function getTree($datas,$file_name,$field_id,$field_pid){
         $arr = array();
         foreach($datas as $k => $v){
-            if($v->cate_pid == 0 ){
-                $datas[$k]['_cate_name'] = $datas[$k]['cate_name'];
+            if($v->$field_pid == 0 ){
+                $datas[$k]['_'.$file_name] = $datas[$k][$file_name];
                 $arr[] =  $datas[$k];
                 foreach($datas as $m =>$n){
-                    if($n->cate_pid == $v->cate_id){
-                        $datas[$m]['_cate_name'] = '├── '.$datas[$m]['cate_name'];
+                    if($n->$field_pid == $v->$field_id){
+                        $datas[$m]['_'.$file_name] = '├── '.$datas[$m][$file_name];
                         $arr[] =  $datas[$m];
                     }
                 }
@@ -39,6 +46,7 @@ class CategoryController extends Controller
         }
         return $arr;
     }
+
     /**
      * Show the form for creating a new resource.
      *
