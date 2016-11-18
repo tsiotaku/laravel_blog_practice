@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 
 class CategoryController extends Controller
 {
@@ -34,7 +35,7 @@ class CategoryController extends Controller
      * @param $file_name  //子分類陣列變數$file_name前面加上'_'頁面上用以增加顯示'├── '符號於子分類前，ex:├── 军事新闻
      * @param $field_id  //文章分類的id
      * @param $field_pid  //子分類屬於哪個主分類pid值為主分類的值
-     * @return array
+     * @return $arr
 
     public function getTree($datas,$file_name,$field_id,$field_pid){
         $arr = array();
@@ -52,6 +53,31 @@ class CategoryController extends Controller
         }
         return $arr;
     }*/
+
+
+    /**
+     * 文章排序修改
+     *
+     * @return $data
+     */
+    public function changeOrder(){
+        $input = Input::all();
+        $cate = Category::find($input['cate_id']);
+        $cate->cate_order = $input['cate_order'];
+        $result = $cate->update();
+        if($result){
+            $data =[
+                'status' => '0',
+                'msg' => '排序更新成功',
+            ];
+        }else{
+            $data =[
+                'status' => '1',
+                'msg' => '排序更新失敗',
+            ];
+        }
+        return $data;
+    }
 
     /**
      * Show the form for creating a new resource.
