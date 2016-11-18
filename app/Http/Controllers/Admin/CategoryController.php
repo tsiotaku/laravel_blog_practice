@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
@@ -98,8 +99,38 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $input = Input::all();
-        dd($input);
+        //$input = Input::all();
+        $input = Input::except('_token'); //使用except()排除_token欄位
+
+        $rules = [
+            'cate_pid' =>'required',
+            'cate_name' => 'required',
+            'cate_title' => 'required',
+            'cate_order' => 'required',
+        ];
+        $msg = [
+            'cate_pid.required' => '請選擇父級分類',
+            'cate_name.required' => '分類名稱不能為空',
+            'cate_title.required' => '分類標題不能為空',
+            'cate_order.required' => '分類排序不能為空',
+
+        ];
+        $validator = Validator::make($input,$rules,$msg);
+        //密碼欄位驗證$input為輸入值,$rules為規則,$msg內建訊息為英文，改寫成中文訊息
+        if($validator->passes()){
+            $re = Category::create($input);
+            if($re){
+                return redirect('admin/category');
+            }else{
+                $validator->errors()->add('add_error', '添加失敗');
+                return back()->withErrors($validator);
+            }
+        }else{
+            return back()->withErrors($validator);
+        }
+
+        return view('admin.pass');
+
     }
 
     /**

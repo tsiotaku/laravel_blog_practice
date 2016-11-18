@@ -13,6 +13,13 @@
 	<div class="result_wrap">
         <div class="result_title">
             <h3>快捷操作</h3>
+            @if(count($errors) >0 )
+                <div class="mark">
+                    @foreach($errors->all() as $error)
+                        <p>{{ $error }}</p>
+                    @endforeach
+                </div>
+            @endif
         </div>
         <div class="result_content">
             <div class="short_wrap">

@@ -9,6 +9,7 @@ class Category extends Model
     protected $table = 'category';
     protected $primaryKey='cate_id';
     public $timestamps =false;
+    protected $guarded=[]; //要排除寫入資料庫的欄位，留空默認所有可寫入
     //寫法三 使用$this調用
     public function tree(){
         $categorys = $this->orderby('cate_order')->get();
