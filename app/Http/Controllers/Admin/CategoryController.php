@@ -17,19 +17,25 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categorys = Category::all();
-        $datas = $this->getTree($categorys,'cate_name','cate_id','cate_pid');
+       /*寫法一
+       $categorys = Category::all();
+        $datas = $this->getTree($categorys,'cate_name','cate_id','cate_pid');*/
 
-        return view('admin.category.index')->with('datas',$datas);
+        /*寫法二 使用Category::tree()，model需使用static function
+        $categorys = Category::tree();*/
+
+        //寫法三 使用(new Category)->tree()，model不用使用static function，在function直接使用$this調用
+        $categorys = (new Category)->tree();
+        return view('admin.category.index')->with('datas',$categorys);
     }
 
-    /**
+    /*寫法一
      * @param $datas  //Category::all()取得的所有文章資訊
      * @param $file_name  //子分類陣列變數$file_name前面加上'_'頁面上用以增加顯示'├── '符號於子分類前，ex:├── 军事新闻
      * @param $field_id  //文章分類的id
      * @param $field_pid  //子分類屬於哪個主分類pid值為主分類的值
      * @return array
-     */
+
     public function getTree($datas,$file_name,$field_id,$field_pid){
         $arr = array();
         foreach($datas as $k => $v){
@@ -45,7 +51,7 @@ class CategoryController extends Controller
             }
         }
         return $arr;
-    }
+    }*/
 
     /**
      * Show the form for creating a new resource.
