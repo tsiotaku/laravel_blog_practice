@@ -143,13 +143,7 @@ class CategoryController extends Controller
     {
         $field = Category::find($cate_id);
         $cate_data = Category::where('cate_pid' , 0)->get();
-        if($field->cate_pid !=0){
-        //編輯主分類可能會造成資料錯亂，因此需判斷編輯的是否為主分類，是的話跳轉到首頁避免讓使用者編輯
         return view('admin.category.edit',compact('field','cate_data'));
-        }else{
-            return redirect('admin/index');
-        }
-
     }
 
     /**

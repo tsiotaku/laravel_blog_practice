@@ -41,7 +41,7 @@
                         <th width="120"><i class="require">*</i>父級分類：</th>
                         <td>
                             <select name="cate_pid">
-                                <option value="0">==請選擇==</option>
+                                <option value="0">==主分類==</option>
 
                                 @foreach($cate_data as $data)
                                 <option value="{{ $data->cate_id }}"
