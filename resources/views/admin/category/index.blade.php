@@ -63,7 +63,7 @@
                         </td>
                         <td class="tc">{{ $data->cate_id }}</td>
                         <td>
-                            <a href="#">{{ $data->cate_name }}</a>
+                            <a href="#">{{ $data->_cate_name }}</a>
                         </td>
                         <td>{{ $data->cate_title }}</td>
                         <td>{{ $data->cate_view }}</td>

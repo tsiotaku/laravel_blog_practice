@@ -18,9 +18,27 @@ class CategoryController extends Controller
     public function index()
     {
         $categorys = Category::all();
-        return view('admin.category.index')->with('datas',$categorys);
+        $datas = $this->getTree($categorys);
+
+        return view('admin.category.index')->with('datas',$datas);
     }
 
+    public function getTree($datas){
+        $arr = array();
+        foreach($datas as $k => $v){
+            if($v->cate_pid == 0 ){
+                $datas[$k]['_cate_name'] = $datas[$k]['cate_name'];
+                $arr[] =  $datas[$k];
+                foreach($datas as $m =>$n){
+                    if($n->cate_pid == $v->cate_id){
+                        $datas[$m]['_cate_name'] = '├── '.$datas[$m]['cate_name'];
+                        $arr[] =  $datas[$m];
+                    }
+                }
+            }
+        }
+        return $arr;
+    }
     /**
      * Show the form for creating a new resource.
      *
