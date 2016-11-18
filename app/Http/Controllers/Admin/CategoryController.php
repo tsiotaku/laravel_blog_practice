@@ -86,7 +86,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $cate_data = Category::where('cate_pid' , 0)->get();
+        return view('admin.category.add',compact('cate_data'));
     }
 
     /**
@@ -97,7 +98,8 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = Input::all();
+        dd($input);
     }
 
     /**
