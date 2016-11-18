@@ -68,8 +68,11 @@
                         <td>{{ $data->cate_title }}</td>
                         <td>{{ $data->cate_view }}</td>
                         <td>
-                            <a href="#">修改</a>
+                            @if($data->cate_pid != 0)
+                            <a href="{{ url('admin/category/'.$data->cate_id.'/edit') }}">修改</a>
                             <a href="#">删除</a>
+                            @endif
+
                         </td>
                     </tr>
                     @endforeach
