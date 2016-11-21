@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Category;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -13,7 +14,8 @@ class ArticleController extends Controller
         echo "顯示全部文章";
     }
     public function create(){
-        $cate_data = [];
+
+        $cate_data = (new Category)->tree();
         return view('admin.article.add',compact('cate_data'));
     }
 }

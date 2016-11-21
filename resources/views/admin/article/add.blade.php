@@ -39,9 +39,8 @@
                         <th width="120">分類：</th>
                         <td>
                             <select name="cate_pid">
-                                <option value="0">==主分類==</option>
                                 @foreach($cate_data as $data)
-                                <option value="{{ $data->cate_id }}">{{ $data->cate_name }}</option>
+                                <option value="{{ $data->cate_id }}">{{ $data->_cate_name }}</option>
                                 @endforeach
                             </select>
                         </td>
@@ -86,7 +85,19 @@
                     <tr>
                         <th><i class="require">*</i>文章內容：</th>
                         <td>
-                            <textarea name="art_content"></textarea>
+                            <script type="text/javascript" charset="utf-8" src="{{asset('resources/org/ueditor/ueditor.config.js')}}"></script>
+                            <script type="text/javascript" charset="utf-8" src="{{asset('resources/org/ueditor/ueditor.all.min.js')}}"> </script>
+                            <script type="text/javascript" charset="utf-8" src="{{asset('resources/org/ueditor/lang/zh-cn/zh-cn.js')}}"></script>
+                            <script id="editor" name="art_content" type="text/plain" style="width:860px;height:500px;"></script>
+                            <script type="text/javascript">
+                                var ue = UE.getEditor('editor'); //實體化編輯器
+                            </script>
+                            <style>
+                                .edui-default{line-height: 28px;}
+                                div.edui-combox-body,div.edui-button-body,div.edui-splitbutton-body
+                                {overflow: hidden; height:20px;}
+                                div.edui-box{overflow: hidden; height:22px;}
+                            </style>
                         </td>
                     </tr>
 
