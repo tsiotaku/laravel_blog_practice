@@ -178,6 +178,28 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $cate_pid = Category::where('cate_id',$id)->value('cate_pid');
+        if( $cate_pid == 0 ){
+            $data =[
+                'status' => '1',
+                'msg' => '您不能刪除主分類',
+            ];
+
+        }else{
+            $re = Category::destroy($id);
+            if($re ==1){
+                $data =[
+                    'status' => '0',
+                    'msg' => '刪除成功',
+                ];
+            }else{
+                $data =[
+                    'status' => '1',
+                    'msg' => '刪除失敗',
+                ];
+            }
+        }
+        return $data;
+
     }
 }

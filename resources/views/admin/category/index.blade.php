@@ -33,12 +33,14 @@
     <!--搜索结果页面 列表 开始-->
     <form action="" method="post">
         <div class="result_wrap">
+            <div class="result_title">
+                <h3>分類管理</h3>
+            </div>
             <!--快捷导航 开始-->
             <div class="result_content">
                 <div class="short_wrap">
-                    <a href="#"><i class="fa fa-plus"></i>新增文章</a>
-                    <a href="#"><i class="fa fa-recycle"></i>批量删除</a>
-                    <a href="#"><i class="fa fa-refresh"></i>更新排序</a>
+                    <a href="{{ url('admin/category/create') }}"><i class="fa fa-plus"></i>添加分類</a>
+                    <a href="{{ url('admin/category') }}"><i class="fa fa-recycle"></i>全部分類</a>
                 </div>
             </div>
             <!--快捷导航 结束-->
@@ -69,7 +71,7 @@
                         <td>{{ $data->cate_view }}</td>
                         <td>
                             <a href="{{ url('admin/category/'.$data->cate_id.'/edit') }}">修改</a>
-                            <a href="#">删除</a>
+                            <a href="javascript:delCatrgory({{$data->cate_id}})" onclick="">删除</a>
 
                         </td>
                     </tr>
@@ -120,6 +122,25 @@
 
                         });
 
+                    }
+
+                    //删除分类
+                    function delCatrgory(cate_id) {
+                        layer.confirm('您確定要刪除嗎!?', {
+                            btn: ['確定','取消'] //按鈕
+                        }, function(){
+                            $.post("{{url('admin/category/')}}/"+cate_id,{'_method':'delete','_token':"{{csrf_token()}}"},function (data) {
+                                if(data.status==0){
+                                    location.href = location.href; //刪除後自動重整頁面
+                                    layer.msg(data.msg, {icon: 6});
+                                }else{
+                                    layer.msg(data.msg, {icon: 5});
+                                }
+                            });
+//            layer.msg('的确很重要', {icon: 1});
+                        }, function(){
+                                //點選 取消 做的動作
+                        });
                     }
                 </script>
 @endsection
