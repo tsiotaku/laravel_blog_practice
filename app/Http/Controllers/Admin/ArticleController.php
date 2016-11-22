@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Validator;
 class ArticleController extends Controller
 {
     public function index(){
-        echo "顯示全部文章";
+        $datas = Article::orderBy('art_id','desc')->paginate(10);
+        return view('admin.article.index',compact('datas'));
     }
     public function create(){
 
