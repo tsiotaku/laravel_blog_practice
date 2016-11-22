@@ -29,16 +29,16 @@
         </div>
     </div>
     <!--结果集标题与导航组件 结束-->
-    
+
     <div class="result_wrap">
-        <form action="{{ url('admin/category') }}" method="post">
+        <form action="{{ url('admin/article') }}" method="post">
             {{ csrf_field() }}
             <table class="add_tab">
                 <tbody>
                     <tr>
                         <th width="120">分類：</th>
                         <td>
-                            <select name="cate_pid">
+                            <select name="cate_id">
                                 @foreach($cate_data as $data)
                                 <option value="{{ $data->cate_id }}">{{ $data->_cate_name }}</option>
                                 @endforeach
@@ -48,13 +48,13 @@
                     <tr>
                         <th><i class="require">*</i>文章標題：</th>
                         <td>
-                            <input type="text" class="lg" name="art_title">
+                            <input type="text" class="lg" name="art_title" value="{{ old('art_title') }}">
                         </td>
                     </tr>
                     <tr>
                         <th>编辑：</th>
                         <td>
-                            <input type="text" class="sm" name="art_editor">
+                            <input type="text" class="sm" name="art_editor" value="{{ old('art_editor') }}">
                         </td>
                     </tr>
                     <tr>
@@ -73,13 +73,13 @@
                     <tr>
                         <th>關鍵詞：</th>
                         <td>
-                            <input type="text" class="lg" name="art_tag">
+                            <input type="text" class="lg" name="art_tag" value="{{ old('art_tag') }}">
                         </td>
                     </tr>
                     <tr>
                         <th>描述：</th>
                         <td>
-                            <textarea name="art_description"></textarea>
+                            <textarea name="art_description">{{ old('art_description') }}</textarea>
                         </td>
                     </tr>
                     <tr>
@@ -88,7 +88,7 @@
                             <script type="text/javascript" charset="utf-8" src="{{asset('resources/org/ueditor/ueditor.config.js')}}"></script>
                             <script type="text/javascript" charset="utf-8" src="{{asset('resources/org/ueditor/ueditor.all.min.js')}}"> </script>
                             <script type="text/javascript" charset="utf-8" src="{{asset('resources/org/ueditor/lang/zh-cn/zh-cn.js')}}"></script>
-                            <script id="editor" name="art_content" type="text/plain" style="width:860px;height:500px;"></script>
+                            <script id="editor" name="art_content" type="text/plain" style="width:860px;height:500px;"> {{ old('art_content') }} </script>
                             <script type="text/javascript">
                                 var ue = UE.getEditor('editor'); //實體化編輯器
                             </script>

@@ -129,7 +129,6 @@ class CategoryController extends Controller
             return back()->withErrors($validator);
         }
 
-        return view('admin.pass');
 
     }
 
