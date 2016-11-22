@@ -69,4 +69,22 @@ class ArticleController extends Controller
         Article::where('art_id',$id)->update($input);
         return redirect('admin/article')->with('msg','修改成功');
     }
+
+    public function destroy($id)
+    {
+        $re = Article::destroy($id);
+            if($re ==1){
+                $data =[
+                    'status' => '0',
+                    'msg' => '刪除成功',
+                ];
+            }else{
+                $data =[
+                    'status' => '1',
+                    'msg' => '刪除失敗',
+                ];
+            }
+        return $data;
+
+    }
 }

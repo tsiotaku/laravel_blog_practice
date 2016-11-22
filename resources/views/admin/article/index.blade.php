@@ -76,7 +76,7 @@
                         <td class="tc">{{date('Y-m-d'), $data->art_time }}</td>
                         <td class="tc">
                             <a href="{{ url('admin/article/'.$data->art_id.'/edit') }}">修改</a>
-                            <a href="#">删除</a>
+                            <a href="javascript:delArticle({{$data->art_id}})" onclick="">删除</a>
                         </td>
                     </tr>
                     @endforeach
@@ -96,4 +96,24 @@
         </div>
     </form>
     <!--搜索结果页面 列表 结束-->
+    <script>
+        //删除文章
+        function delArticle(art_id) {
+            layer.confirm('您確定要刪除嗎!?', {
+                btn: ['確定','取消'] //按鈕
+            }, function(){
+                $.post("{{url('admin/article/')}}/"+art_id,{'_method':'delete','_token':"{{csrf_token()}}"},function (data) {
+                    if(data.status==0){
+                        location.href = location.href; //刪除後自動重整頁面
+                        layer.msg(data.msg, {icon: 6});
+                    }else{
+                        layer.msg(data.msg, {icon: 5});
+                    }
+                });
+//            layer.msg('的确很重要', {icon: 1});
+            }, function(){
+                //點選 取消 做的動作
+            });
+        }
+    </script>
 @endsection
