@@ -55,4 +55,18 @@ class ArticleController extends Controller
         }
 
     }
+
+    public function edit($art_id)
+    {
+        $field = Article::find($art_id);
+        $cate_data = (new Category)->tree();
+        return view('admin.article.edit',compact('field','cate_data'));
+    }
+
+    public function update($id)
+    {
+        $input = Input::except('_token','_method','file_upload');
+        Article::where('art_id',$id)->update($input);
+        return redirect('admin/article')->with('msg','修改成功');
+    }
 }

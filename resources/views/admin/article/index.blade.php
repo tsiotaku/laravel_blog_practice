@@ -37,6 +37,11 @@
             <!--快捷导航 开始-->
             <div class="result_title">
                 <h3>文章列表</h3>
+                @if(session('msg'))
+                    <div class="mark">
+                        <p style="color:green">{{session('msg')}}</p>
+                    </div>
+                @endif
             </div>
             <div class="result_content">
                 <div class="short_wrap">
@@ -70,7 +75,7 @@
                         <td class="tc">{{ $data->art_editor }}</td>
                         <td class="tc">{{date('Y-m-d'), $data->art_time }}</td>
                         <td class="tc">
-                            <a href="#">修改</a>
+                            <a href="{{ url('admin/article/'.$data->art_id.'/edit') }}">修改</a>
                             <a href="#">删除</a>
                         </td>
                     </tr>
