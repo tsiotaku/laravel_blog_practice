@@ -35,6 +35,11 @@
         <div class="result_wrap">
             <div class="result_title">
                 <h3>分類管理</h3>
+                @if(session('msg'))
+                    <div class="mark">
+                        <p style="color:green">{{session('msg')}}</p>
+                    </div>
+                @endif
             </div>
             <!--快捷导航 开始-->
             <div class="result_content">

@@ -120,7 +120,7 @@ class CategoryController extends Controller
         if($validator->passes()){
             $re = Category::create($input);
             if($re){
-                return redirect('admin/category');
+                return redirect('admin/category')->with('msg','新增成功');
             }else{
                 $validator->errors()->add('add_error', '添加失敗');
                 return back()->withErrors($validator);
@@ -155,7 +155,7 @@ class CategoryController extends Controller
     public function update(Request $request, $id){
         $input = Input::except('_token','_method'); //使用except()排、_methodtoken欄位d $result =
         Category::where('cate_id',$id)->update($input);
-        return  redirect('admin/category');
+        return  redirect('admin/category')->with('msg','修改成功');
     }
 
     /**

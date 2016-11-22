@@ -45,7 +45,7 @@ class ArticleController extends Controller
         if($validator->passes()){
             $re = Article::create($input);
             if($re){
-                return redirect('admin/article');
+                return redirect('admin/article')->with('msg','新增成功');
             }else{
                 $validator->errors()->add('add_error', '添加失敗');
                 return back()->withErrors($validator);
