@@ -76,7 +76,12 @@
                                         },
                                         'swf'      : "{{asset('resources/org/uploadify/uploadify.swf')}}",
                                         //'uploader' : "{{asset('resources/org/uploadify/uploadify.php')}}"
-                                        'uploader' : "{{ url('admin/uploadimg') }}"
+                                        'uploader' : "{{ url('admin/uploadimg') }}",
+                                        'onUploadSuccess' : function(file, data, response) {
+                                            $('input[name=art_thumb]').val(data);
+                                            $('#art_thumb_img').attr('src','{{url("/")}}'+data);
+//                                    alert(data);
+                                        }
                                     });
                                 });
                             </script>

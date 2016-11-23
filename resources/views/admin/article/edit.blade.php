@@ -63,7 +63,7 @@
                     <tr>
                         <th>缩略图：</th>
                         <td>
-                            <input type="text" size="50" name="art_thumb">
+                            <input type="text" size="50" name="art_thumb" value="{{ $field->art_thumb }}">
                             <input id="file_upload" name="file_upload" type="file" multiple="true">
                             <script src="{{asset('resources/org/uploadify/jquery.uploadify.min.js')}}" type="text/javascript"></script>
                             <link rel="stylesheet" type="text/css" href="{{asset('resources/org/uploadify/uploadify.css')}}">
@@ -79,7 +79,12 @@
                                         },
                                         'swf'      : "{{asset('resources/org/uploadify/uploadify.swf')}}",
                                         //'uploader' : "{{asset('resources/org/uploadify/uploadify.php')}}"
-                                        'uploader' : "{{ url('admin/uploadimg') }}"
+                                        'uploader' : "{{ url('admin/uploadimg') }}",
+                                        'onUploadSuccess' : function(file, data, response) {
+                                            $('input[name=art_thumb]').val(data);
+                                            $('#art_thumb_img').attr('src','{{url("/")}}'+data);
+//                                    alert(data);
+                                        }
                                     });
                                 });
                             </script>
@@ -93,7 +98,7 @@
                     <tr>
                         <th></th>
                         <td>
-                            <img src="" alt="" id="art_thumb_img" style="max-width: 350px; max-height:100px;">
+                            <img src="{{ url($field->art_thumb) }}" alt="" id="art_thumb_img" style="max-width: 350px; max-height:100px;">
                         </td>
                     </tr>
                     <tr>

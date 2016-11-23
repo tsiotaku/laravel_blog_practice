@@ -89,6 +89,24 @@ class ArticleController extends Controller
     }
 
     public function article_upload_image(){
-        echo "upload";
+        $file = Input::file('Filedata');
+        if($file -> isValid()) {
+
+            // Validate the file type
+            $fileTypes = array('jpg','jpeg','gif','png'); // File extensions
+            $entension = $file->getClientOriginalExtension(); //上傳文件的附檔名
+
+            if (in_array($entension,$fileTypes)) { //判斷上傳檔案是否為圖片
+                //$realPath = $file->getRealPath(); //臨時文件的路徑
+                $newFile = date('YmdHis') . mt_rand(000, 999) . "." . $entension;
+                $path = $file->move(base_path() . '/uploads', $newFile);
+                $newFilePath = '/uploads/'.$newFile;
+                return $newFilePath;
+            } else {
+                return "上傳的檔案非圖片，請上傳圖片";
+            }
+
+        }
+
     }
 }
