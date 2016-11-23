@@ -52,9 +52,9 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>编辑：</th>
+                        <th>文章作者：</th>
                         <td>
-                            <input type="text" class="sm" name="art_editor" value="{{ old('art_editor') }}">
+                            <input type="hidden" class="sm" name="art_editor" value="{{ session('user')->user_name }}"><label>{{ session('user')->user_name }}</label>
                         </td>
                     </tr>
                     <tr>

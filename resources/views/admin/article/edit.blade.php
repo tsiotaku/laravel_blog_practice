@@ -55,9 +55,9 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>编辑：</th>
+                        <th>文章作者：</th>
                         <td>
-                            <input type="text" class="sm" name="art_editor" value="{{ $field->art_editor }}">
+                            {{ $field->art_editor }}
                         </td>
                     </tr>
                     <tr>
