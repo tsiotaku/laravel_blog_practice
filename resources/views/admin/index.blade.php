@@ -36,7 +36,8 @@
             </li>
             <li>
             	<h3><i class="fa fa-fw fa-cog"></i>系统设置</h3>
-                <ul class="sub_menu">
+				<ul class="sub_menu" style="display: block;">
+					<li><a href="{{url('admin/nav')}}" target="main"><i class="fa fa-fw fa-navicon"></i>自定義導覽列</a></li>
                     <li><a href="#" target="main"><i class="fa fa-fw fa-cubes"></i>网站配置</a></li>
                     <li><a href="#" target="main"><i class="fa fa-fw fa-database"></i>备份还原</a></li>
                 </ul>
