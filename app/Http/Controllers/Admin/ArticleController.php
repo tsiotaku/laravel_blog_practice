@@ -87,4 +87,8 @@ class ArticleController extends Controller
         return $data;
 
     }
+
+    public function article_upload_image(){
+        echo "upload";
+    }
 }
