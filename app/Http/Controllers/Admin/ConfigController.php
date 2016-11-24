@@ -20,11 +20,11 @@ class ConfigController extends Controller
         foreach($datas as $key=>$data){
             switch($data->field_type){
                 case 'input':
-                    $datas[$key]->_html= "<input type='text' class='lg' name='conf_content' value='".$data->conf_content."' >";
+                    $datas[$key]->_html= "<input type='text' class='lg' name='conf_content[]' value='".$data->conf_content."' >";
                 break;
 
                 case 'textarea':
-                    $datas[$key]->_html= "<textarea type='text' class='lg' name='conf_content'>".$data->conf_content."</textarea>";
+                    $datas[$key]->_html= "<textarea type='text' class='lg' name='conf_content[]'>".$data->conf_content."</textarea>";
                 break;
 
                 case 'radio':
@@ -42,7 +42,7 @@ class ConfigController extends Controller
                     foreach($arrStr as $arr){
                         $radioVal = explode('|',$arr);
                         $radrioChecked = $data->conf_content==$radioVal[0]? 'checked' : '' ;//判斷變量值是否與radio的值相等，是的話checked當前radio
-                        $str.= "<input type='radio' name='conf_content' value='".$radioVal[0]."' ".$radrioChecked." >".$radioVal[1];
+                        $str.= "<input type='radio' name='conf_content[]' value='".$radioVal[0]."' ".$radrioChecked." >".$radioVal[1];
                         $datas[$key]->_html= $str ;
                     }
                 break;
@@ -101,6 +101,13 @@ class ConfigController extends Controller
         return  redirect('admin/config')->with('msg','修改成功');
     }
 
+    public function changeContent(){
+        $input = Input::all();
+        foreach($input['conf_id'] as $k=>$v){
+            Config::where('conf_id',$v)->update([ 'conf_content' => $input['conf_content'][$k] ]);
+        }
+        return back()->with('msg','修改成功');
+    }
     public function changeOrder(){
         $input = Input::all();
         $config = Config::find($input['conf_id']);

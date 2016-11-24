@@ -40,4 +40,5 @@ Route::group(['middleware' => ['admin.login'],'prefix' => 'admin','namespace' =>
 
     Route::resource('config','ConfigController');
     Route::post('config/changeorder', 'ConfigController@changeOrder');
+    Route::post('config/changecontent', 'ConfigController@changeContent');
 });
