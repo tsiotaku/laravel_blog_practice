@@ -121,9 +121,9 @@
     </form>
     <!--搜索结果页面 列表 结束-->--}}
                 <script>
-                    function changeOrder(obj,config_id){
-                        var config_order = $(obj).val();
-                        $.post("{{url('admin/config/changeorder')}}",{'_token':'{{csrf_token()}}','config_order':config_order,'config_id':config_id}, function (data) {
+                    function changeOrder(obj,conf_id){
+                        var conf_order = $(obj).val();
+                        $.post("{{url('admin/config/changeorder')}}",{'_token':'{{csrf_token()}}','conf_order':conf_order,'conf_id':conf_id}, function (data) {
                             if(data.status == 0){
                                 layer.msg(data.msg,{icon:6});
                             }else{
@@ -135,11 +135,11 @@
                     }
 
                     //删除分类
-                    function delLink(config_id) {
+                    function delLink(conf_id) {
                         layer.confirm('您確定要刪除嗎!?', {
                             btn: ['確定','取消'] //按鈕
                         }, function(){
-                            $.post("{{url('admin/config/')}}/"+config_id,{'_method':'delete','_token':"{{csrf_token()}}"},function (data) {
+                            $.post("{{url('admin/config/')}}/"+conf_id,{'_method':'delete','_token':"{{csrf_token()}}"},function (data) {
                                 if(data.status==0){
                                     location.href = location.href; //刪除後自動重整頁面
                                     layer.msg(data.msg, {icon: 6});

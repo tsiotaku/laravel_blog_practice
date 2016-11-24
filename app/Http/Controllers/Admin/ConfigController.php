@@ -31,10 +31,10 @@ class ConfigController extends Controller
     {
         $input = Input::except('_token');
         $rules = [
-            'config_name' =>'required',
+            'conf_name' =>'required',
         ];
         $msg = [
-            'config_name.required' => '不能為空',
+            'conf_name.required' => '不能為空',
         ];
 
         $validator = Validator::make($input,$rules,$msg);
@@ -61,14 +61,14 @@ class ConfigController extends Controller
     public function update(Request $request, $id)
     {
         $input = Input::except('_token','_method'); //使用except()排除_token、_method欄位
-        Config::where('config_id',$id)->update($input);
+        Config::where('conf_id',$id)->update($input);
         return  redirect('admin/config')->with('msg','修改成功');
     }
 
     public function changeOrder(){
         $input = Input::all();
-        $config = Config::find($input['config_id']);
-        $config->config_order = $input['config_order'];
+        $config = Config::find($input['conf_id']);
+        $config->conf_order = $input['conf_order'];
         $result = $config->update();
         if($result){
             $data =[
