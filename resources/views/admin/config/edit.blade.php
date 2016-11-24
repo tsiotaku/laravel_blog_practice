@@ -53,11 +53,12 @@
                 <tr>
                     <th>類型：</th>
                     <td>
-                        <input type="text" class="sm" name="field_type" value="{{$datas->field_type}}">
-                        <span><i class="fa fa-exclamation-circle yellow"></i>類型：input、textarea、radio</span>
+                        <input type="radio" class="sm" name="field_type" value="input" @if( $datas->field_type=='input') checked @endif onclick="showTr()">input　
+                        <input type="radio" class="sm" name="field_type" value="textarea" @if( $datas->field_type=='textarea') checked @endif onclick="showTr()">textarea　
+                        <input type="radio" class="sm" name="field_type" value="radio" @if( $datas->field_type=='radio') checked @endif onclick="showTr()">radio
                     </td>
                 </tr>
-                <tr>
+                <tr class="field_value">
                     <th>類型值：</th>
                     <td>
                         <input type="text" class="lg" name="field_value" value="{{$datas->field_value}}">
@@ -87,4 +88,15 @@
             </table>
         </form>
     </div>
+    <script>
+        showTr();
+        function showTr(){
+            var type = $('input[name=field_type]:checked').val();
+            if(type == 'radio'){
+                $('.field_value').show();
+            }else{
+                $('.field_value').hide();
+            }
+        }
+    </script>
 @endsection

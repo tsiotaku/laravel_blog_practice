@@ -31,10 +31,12 @@ class ConfigController extends Controller
     {
         $input = Input::except('_token');
         $rules = [
+            'conf_title' =>'required',
             'conf_name' =>'required',
         ];
         $msg = [
-            'conf_name.required' => '不能為空',
+            'conf_title.required' => '標題不能為空',
+            'conf_name.required' => '名稱不能為空',
         ];
 
         $validator = Validator::make($input,$rules,$msg);
