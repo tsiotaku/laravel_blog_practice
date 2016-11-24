@@ -25,14 +25,19 @@ Route::group(['middleware' => ['admin.login'],'prefix' => 'admin','namespace' =>
     Route::get('info', 'IndexController@info');
     Route::any('pass', 'IndexController@pass');
     Route::get('quit', 'LoginController@quit');
+
     Route::post('cate/changeorder', 'CategoryController@changeOrder');
     Route::resource('category','CategoryController');
+
     Route::resource('article','ArticleController');
+    Route::any('uploadimg','ArticleController@article_upload_image');
+
     Route::post('link/changeorder', 'LinkController@changeOrder');
     Route::resource('link','LinkController');
+
     Route::post('nav/changeorder', 'NavController@changeOrder');
     Route::resource('nav','NavController');
+
     Route::resource('config','ConfigController');
     Route::post('config/changeorder', 'ConfigController@changeOrder');
-    Route::any('uploadimg','ArticleController@article_upload_image');
 });
