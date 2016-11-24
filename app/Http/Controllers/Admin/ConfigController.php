@@ -15,6 +15,40 @@ class ConfigController extends Controller
     public function index()
     {
         $datas = Config::all();
+
+        //使用foreach取的$data->field_type的值再用switch判斷，input、textarea、radio各自有不同處理
+        foreach($datas as $key=>$data){
+            switch($data->field_type){
+                case 'input':
+                    $datas[$key]->_html= "<input type='text' class='lg' name='conf_content' value='".$data->conf_content."' >";
+                break;
+
+                case 'textarea':
+                    $datas[$key]->_html= "<textarea type='text' class='lg' name='conf_content'>".$data->conf_content."</textarea>";
+                break;
+
+                case 'radio':
+                    /*radio的值
+                    $data->field_type：1|开启,0|关闭
+                    $arrStr = 1|开启 ($arr)
+                              0|关闭 ($arr)
+                    $radioVal= 1
+                               开启,
+                               0
+                               关闭,
+                    */
+                    $arrStr = explode(',',$data->field_value);
+                    $str = '';
+                    foreach($arrStr as $arr){
+                        $radioVal = explode('|',$arr);
+                        $radrioChecked = $data->conf_content==$radioVal[0]? 'checked' : '' ;//判斷變量值是否與radio的值相等，是的話checked當前radio
+                        $str.= "<input type='radio' name='conf_content' value='".$radioVal[0]."' ".$radrioChecked." >".$radioVal[1];
+                        $datas[$key]->_html= $str ;
+                    }
+                break;
+            }
+        }
+
         return view('admin.config.index',compact('datas'));
     }
 

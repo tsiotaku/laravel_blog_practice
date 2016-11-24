@@ -57,10 +57,10 @@
                     <tr>
                         <th class="tc" width="5%">排序</th>
                         <th class="tc" width="5%">ID</th>
-                        <th>標題</th>
-                        <th>名稱</th>
-                        <th>內容</th>
-                        <th>操作</th>
+                        <th  width="10%">標題</th>
+                        <th  width="20%" >名稱</th>
+                        <th  width="50%">內容</th>
+                        <th  width="10%">操作</th>
                     </tr>
                     @foreach($datas as $data)
                     <tr>
@@ -77,7 +77,7 @@
                             {{ $data->conf_name }}
                         </td>
                         <td>
-                            {{ $data->conf_tips }}
+                            {!! $data->_html !!}
                         </td>
                         <td>
                             <a href="{{ url('admin/config/'.$data->conf_id.'/edit') }}">修改</a>
